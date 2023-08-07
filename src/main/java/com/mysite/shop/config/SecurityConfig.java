@@ -61,6 +61,9 @@ public class SecurityConfig {
 				//                             password 필드의 name = "password" 
 				.usernameParameter("email")
 				//.passwordParameter("password")
+				
+				// MemberService 
+				
 				.failureUrl("/members/login/error")
 
 				.defaultSuccessUrl("/")

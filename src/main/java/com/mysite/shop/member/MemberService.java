@@ -33,13 +33,17 @@ public class MemberService implements UserDetailsService {
         }
     }
 
+    
+    // 인증을 처리하는 메소드 : UserDetailsService의 선언만 된 메소드 구현해서 생성
+    
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Member member = memberRepository.findByEmail(email);
         
-        log.info("=====> : " + email);
-        log.info("=====> : " + member.getEmail()); 
+        //로그로 변수의 값을 출력 
+        log.info("client form : =====> : " + email);
+        log.info("server DB : =====> : " + member.getEmail()); 
         log.info("=====> : " + member.getRole()); 
         log.info("=====> : " + member.getRole().toString());
 
@@ -52,6 +56,7 @@ public class MemberService implements UserDetailsService {
         
         // User 객체에는 3가지 값이 반드시 적용 : 1. ID , 2. Pass, 3. Authorization (Role) 
         // Spring Security 에서 인증이 완료되면  ROLE_USER, ROLE_ADMIN
+        // 아래 USER는 MEMBER의 USER가 아닌 SPRING에 있는 USER
         return User.builder()
                 .username(member.getEmail())
                 .password(member.getPassword())
